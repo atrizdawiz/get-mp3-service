@@ -1,0 +1,8 @@
+**/*[Dd]ocker*
+**/.DS_Store
+**/*.vscode
+**/*.git
+**/*.md
+
+**/node_modules/
+**/.[Ee][Nn][Vv].*
