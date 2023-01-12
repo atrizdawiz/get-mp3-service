@@ -1,6 +1,6 @@
 import cors from "cors";
 import express from "express";
-import routes from "./routes";
+import youtubeClient from "./clients/youtubeClient";
 
 const app = express();
 declare global {
@@ -13,15 +13,15 @@ declare global {
 app.use(cors());
 app.options("*", cors());
 app.use(express.json());
-app.use("/", routes);
 
 const port = 3000;
 
-app.get("/", (_, res) => {
-  res.status(200).send(
-    `<h1>Tjena!</h1>
-  <h2>api in full effect</h2>`
-  );
+app.get("/:youtube", (req, res) => {
+  const youtubeId = req.params.youtube;
+
+  youtubeClient.downloadMp3(youtubeId);
+
+  res.status(200).send({ id: youtubeId });
 });
 
 app.listen(port, () => console.log(`Running on port ${port}`));
