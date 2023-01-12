@@ -4,7 +4,10 @@ import ffmpeg from "fluent-ffmpeg";
 import path from "path";
 
 const downloadMp3 = async (id: string) => {
-  const downloadFolder = path.join(__dirname, "../..", "downloads");
+  const { MP3_DOWNLOAD_DIRECTORY } = process.env;
+
+  const downloadFolder =
+    MP3_DOWNLOAD_DIRECTORY ?? path.join(__dirname, "../..", "downloads");
 
   let stream = ytdl(id, {
     quality: "highestaudio",
