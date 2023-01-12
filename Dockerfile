@@ -20,10 +20,12 @@ RUN yarn build
 FROM node:19-alpine AS runner
 WORKDIR /app
 
+RUN apk add ffmpeg
+
 
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nodeUser -u 1001
-
+RUN mkdir downloads
 RUN chown -R nodeUser:nodejs /app
 
 # You only need to copy next.config.js if you are NOT using the default configuration

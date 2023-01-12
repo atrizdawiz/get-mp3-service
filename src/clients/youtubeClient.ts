@@ -6,14 +6,27 @@ import path from "path";
 const downloadMp3 = async (id: string) => {
   const { MP3_DOWNLOAD_DIRECTORY } = process.env;
 
+  if (!ytdl.validateID(id)) {
+    throw new Error("Invalid youtube id provided");
+  }
+
   const downloadFolder =
     MP3_DOWNLOAD_DIRECTORY ?? path.join(__dirname, "../..", "downloads");
+  let stream;
+  try {
+    stream = await ytdl(id, {
+      quality: "highestaudio",
+    });
+  } catch (error) {
+    console.error("Could find stream", error);
+  }
 
-  let stream = ytdl(id, {
-    quality: "highestaudio",
-  });
-
-  const title = await getTitle(id);
+  let title: string;
+  try {
+    title = await getTitle(id);
+  } catch {
+    title = id;
+  }
 
   let start = Date.now();
   ffmpeg(stream)
