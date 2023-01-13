@@ -15,7 +15,7 @@
   },
   "scripts": {
     "dev": "yarn nodemon",
-    "build": "tsc -p .",
+    "build": "tsc -p . && cp ./src/index.html ./build/index.html",
     "start": "node build/index.js"
   },
   "dependencies": {
