@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Get mp3 service</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    
+<h1>Get mp3 service</h1>
+<h2 id="status">Ready</h2>
+
+  <input id="youtubeId" name="youtubeId"/>
+  <button role="submit" onclick="submitForm()">download mp3</button>
+
+<script>
+  function submitForm() {
+    const statusElement = document.getElementById("status")
+    const inputElement = document.getElementById("youtubeId")
+    const youtubeId = inputElement.value;
+    fetch(`/get-mp3/${youtubeId}`).then(res =>{if(res.ok){
+    inputElement.value = ''
+    statusElement.innerText = "Request accepted"
+    }
+  else{
+    statusElement.innerText = "Something went wrong, probably incorrect video id"
+  }
+  })
+}
+</script>
+  </body>
+</html>
