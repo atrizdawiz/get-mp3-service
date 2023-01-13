@@ -2,6 +2,13 @@ import readline from "readline";
 import ytdl from "ytdl-core";
 import ffmpeg from "fluent-ffmpeg";
 import path from "path";
+import fs from "fs";
+
+const createDownloadDirectoryIfNonExistent = (dir: string) => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
+  }
+};
 
 const downloadMp3 = async (id: string) => {
   if (!ytdl.validateID(id)) {
@@ -9,6 +16,8 @@ const downloadMp3 = async (id: string) => {
   }
 
   const downloadFolder = path.join(__dirname, "../..", "downloads");
+
+  createDownloadDirectoryIfNonExistent(downloadFolder);
 
   let stream;
   try {
