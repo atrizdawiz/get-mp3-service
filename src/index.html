@@ -18,10 +18,10 @@
 <h2 id="status">Ready</h2>
 
   <input id="youtubeId" name="youtubeId"/>
-  <button role="submit" onclick="submitForm()">download mp3</button>
+  <button role="submit" onclick="downloadMp3()">download mp3</button>
 
 <script>
-  function submitForm() {
+  function downloadMp3() {
     const statusElement = document.getElementById("status")
     const inputElement = document.getElementById("youtubeId")
     const youtubeId = inputElement.value;
