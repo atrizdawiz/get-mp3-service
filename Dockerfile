@@ -16,7 +16,7 @@ COPY --from=deps /app/node_modules ./node_modules
 # Build application
 RUN yarn build
 
-# Production image, copy all the files and run next
+# Production image, copy all the files, install ffmpeg and run express server
 FROM node:19-alpine AS runner
 WORKDIR /app
 
@@ -28,7 +28,6 @@ RUN adduser -S nodeUser -u 1001
 RUN mkdir downloads
 RUN chown -R nodeUser:nodejs /app
 
-# You only need to copy next.config.js if you are NOT using the default configuration
 COPY --from=builder --chown=nodeUser:nodejs /app/build ./build
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
