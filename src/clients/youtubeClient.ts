@@ -4,14 +4,11 @@ import ffmpeg from "fluent-ffmpeg";
 import path from "path";
 
 const downloadMp3 = async (id: string) => {
-  const { MP3_DOWNLOAD_DIRECTORY } = process.env;
-
   if (!ytdl.validateID(id)) {
     throw new Error("Invalid youtube id provided");
   }
 
-  const downloadFolder =
-    MP3_DOWNLOAD_DIRECTORY ?? path.join(__dirname, "../..", "downloads");
+  const downloadFolder = path.join(__dirname, "../..", "downloads");
 
   let stream;
   try {

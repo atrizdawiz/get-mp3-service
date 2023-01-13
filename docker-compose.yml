@@ -1,0 +1,8 @@
+services:
+  backend:
+    image: 'get-mp3-service:latest'
+    build: '.'
+    ports:
+      - '3000:3000'
+    volumes:
+      - ${LOCAL_DOWNLOAD_FOLDER}:/app/downloads/
