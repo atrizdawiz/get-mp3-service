@@ -10,8 +10,8 @@ app.use(express.json());
 
 const port = 3000;
 
-app.get("/get-mp3/:youtube", async (req, res) => {
-  const youtubeId = req.params.youtube;
+app.get("/get-mp3/:youtubeId", async (req, res) => {
+  const { youtubeId } = req.params;
   try {
     await youtubeClient.downloadMp3(youtubeId);
     res.send({ status: "ok" });
