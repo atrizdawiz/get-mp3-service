@@ -12,6 +12,7 @@ const downloadMp3 = async (id: string) => {
 
   const downloadFolder =
     MP3_DOWNLOAD_DIRECTORY ?? path.join(__dirname, "../..", "downloads");
+
   let stream;
   try {
     stream = await ytdl(id, {
