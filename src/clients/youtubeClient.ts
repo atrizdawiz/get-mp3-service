@@ -29,7 +29,7 @@ const downloadMp3 = async (id: string) => {
       quality: "highestaudio",
     });
   } catch (error) {
-    throw new Error("Could not find stream", error);
+    throw new Error("Could not find stream");
   }
 
   let title: string;
