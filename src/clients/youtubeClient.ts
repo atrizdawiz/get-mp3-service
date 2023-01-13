@@ -29,13 +29,14 @@ const downloadMp3 = async (id: string) => {
       quality: "highestaudio",
     });
   } catch (error) {
-    console.error("Could not find stream", error);
+    throw new Error("Could not find stream", error);
   }
 
   let title: string;
   try {
     title = await getTitle(id);
   } catch {
+    console.error("Failed to get title");
     title = id;
   }
 
