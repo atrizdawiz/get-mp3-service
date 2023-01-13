@@ -10,12 +10,16 @@ const createDownloadDirectoryIfNonExistent = (dir: string) => {
   }
 };
 
+const getTitle = (id: string) => {
+  return ytdl.getBasicInfo(id).then((info) => info.videoDetails.title);
+};
+
+const downloadFolder = path.join(__dirname, "../..", "downloads");
+
 const downloadMp3 = async (id: string) => {
   if (!ytdl.validateID(id)) {
     throw new Error("Invalid youtube id provided");
   }
-
-  const downloadFolder = path.join(__dirname, "../..", "downloads");
 
   createDownloadDirectoryIfNonExistent(downloadFolder);
 
@@ -25,7 +29,7 @@ const downloadMp3 = async (id: string) => {
       quality: "highestaudio",
     });
   } catch (error) {
-    console.error("Could find stream", error);
+    console.error("Could not find stream", error);
   }
 
   let title: string;
@@ -46,10 +50,6 @@ const downloadMp3 = async (id: string) => {
     .on("end", () => {
       console.log(`\ndone, thanks - ${(Date.now() - start) / 1000}s`);
     });
-};
-
-const getTitle = (id: string) => {
-  return ytdl.getBasicInfo(id).then((info) => info.videoDetails.title);
 };
 
 export default { downloadMp3 };
