@@ -4,6 +4,6 @@ services:
     build: '.'
     ports:
       - '3000:3000'
-    restart: on-failure
+    restart: unless-stopped
     volumes:
       - ${LOCAL_DOWNLOAD_FOLDER}:/app/downloads/
