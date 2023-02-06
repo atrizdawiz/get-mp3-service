@@ -13,8 +13,9 @@ const createDownloadDirectoryIfNonExistent = (dir: string) => {
 const getTitle = (id: string) => {
   return ytdl.getBasicInfo(id).then((info) => info.videoDetails.title);
 };
-
-const downloadFolder = path.join(__dirname, "../..", "downloads");
+const localFolderFromEnv = process.env.LOCAL_DOWNLOAD_FOLDER;
+const downloadFolder =
+  localFolderFromEnv ?? path.join(__dirname, "../..", "downloads");
 
 const downloadMp3 = async (id: string) => {
   if (!ytdl.validateID(id)) {
