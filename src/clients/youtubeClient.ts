@@ -44,7 +44,7 @@ const downloadMp3 = async (id: string) => {
   let start = Date.now();
   ffmpeg(stream)
     .audioBitrate(256)
-    .save(`${downloadFolder}/${title}.mp3`)
+    .save(`${downloadFolder}/${title.replace("/", "")}.mp3`)
     .on("progress", (p) => {
       readline.cursorTo(process.stdout, 0);
       process.stdout.write(`${p.targetSize}kb downloaded`);
